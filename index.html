@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul & Mary's Wedding</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="invitation-container" id="invitationContainer">
+        
+        <!-- ==========================================
+             INTRO SCREEN (첫 화면: 언어/사운드 선택)
+             ========================================== -->
+        <div id="introScreen" class="intro-screen snap-section">
+            <div class="letter-card">
+                
+                <div class="ribbon-icon">
+                    <svg width="45" height="55" viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M50 15 C40 5, 20 5, 15 20 C10 35, 30 50, 50 65 C70 50, 90 35, 85 20 C80 5, 60 5, 50 15 Z" />
+                        <path d="M50 65 L35 110 L50 100 L65 110 Z" />
+                    </svg>
+                </div>
+
+                <div class="intro-subtitle" data-en="THE WEDDING OF" data-ko="소중한 두 사람의 결혼식">THE WEDDING OF</div>
+                <h1 class="intro-names">
+                    Mary Hyojin Park
+                    <span class="intro-amp">&</span>
+                    Paul Taehyun Lee
+                </h1>
+                
+                <div class="intro-date">Saturday, Nov 7, 2026</div>
+
+                <div class="intro-controls-row">
+                    <button type="button" class="sound-toggle-pill" id="introSoundBtn" onclick="toggleIntroSound()">
+                        <span id="introSoundIcon">🔊</span> 
+                        <span id="introSoundLabel" data-en="Sound: On" data-ko="소리: 켜짐">Sound: On</span>
+                    </button>
+
+                    <button type="button" class="sound-toggle-pill" id="introLangBtn" onclick="toggleIntroLanguage()">
+                        <span id="introLangLabel">🇰🇷 한글</span>
+                    </button>
+                </div>
+
+                <button class="enter-invitation-btn" onclick="enterInvitation()" data-en="Enter Invitation" data-ko="청첩장 보러가기">
+                    Enter Invitation
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ==========================================
+             MAIN CONTENT SECTIONS (본문 슬라이드 영역)
+             ========================================== -->
+        <div id="mainContent" style="display: none; height: 100%; width: 100%;">
+            
+            <!-- Top Controls Bar (고정 UI) -->
+            <div class="top-controls-bar">
+                <button class="control-btn" id="soundToggleBtn" onclick="toggleSound()">
+                    <span id="soundIcon">🔊</span> <span id="soundText">Sound On</span>
+                </button>
+                <button class="control-btn" id="langToggleBtn" onclick="toggleLanguage()">KOR</button>
+            </div>
+
+            <!-- PAGE 1: Full Page Photo Intro -->
+            <section class="snap-section full-page-intro">
+                <div class="intro-text-container" id="introTextContainer">
+                    <h1 class="typewriter-title">
+                        <span id="typewriterText"></span><span class="cursor" id="typeCursor">|</span>
+                    </h1>
+                </div>
+                
+                <div class="full-photo-frame" id="fullPhotoFrame">
+                    <img src="images/Mary_Paul-001.jpg" alt="Paul & Mary Wedding Photo" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'">
+                    
+                    <div class="cursive-welcome-container">
+                        <span id="cursiveTypewriterText"></span><span class="cursive-cursor" id="cursiveCursor">|</span>
+                    </div>
+                </div>
+                <!-- 1페이지 하단 스크롤 유도 인디케이터 -->
+                <div id="scrollCue" class="scroll-cue-wrap">
+                    <span class="scroll-cue-text" data-en="SCROLL" data-ko="아래로 스크롤">SCROLL</span>
+                    <div class="scroll-cue-line"></div>
+                </div>
+
+            </section>
+
+            <!-- PAGE 2: Invitation Message & Parents Info -->
+            <section class="snap-section page-section pink-bg-section">
+                <div class="section-inner invitation-inner" style="max-width: 380px;">
+                    <div class="page2-badge" data-en="Invitation" data-ko="소중한 분들을 초대합니다">Invitation</div>
+                    
+                    <p class="intro-text" 
+                       data-en="Two separate paths have met to form one shared journey. We warmly invite you to celebrate our new beginning as we promise our forever to each other."
+                       data-ko="서로 다른 길을 걸어오던 두 사람이 이제 하나되어 같은 곳을 바라보려 합니다. 평생을 함께 하겠다는 소중한 약속의 자리에 귀한 걸음하셔서 따뜻한 축복을 더해 주세요.">
+                        Two separate paths have met to form one shared journey. We warmly invite you to celebrate our new beginning as we promise our forever to each other.
+                    </p>
+
+                    <div class="divider-line"></div>
+
+                    <!-- 가로로 나란히 배치되는 부모님/혼주 정보 + 각자 사진 -->
+                    <div class="parents-container">
+                        <div class="person-group">
+                            <div class="role-tag" data-en="Groom" data-ko="신랑">Groom</div>
+                            <div class="name">Paul Taehyun Lee</div>
+                            <div class="parents">
+                                <span data-en="Son of Jason Dongjin Lee & Ae Sook Lee" data-ko="이동진 · 이애숙의 아들">Son of Jason Dongjin Lee & Ae Sook Lee</span>
+                            </div>
+                            <div class="person-photo-box" onclick="openLightbox('images/groom.jpg')">
+                                <img src="images/groom.jpeg" alt="Paul Taehyun Lee" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80'">
+                            </div>
+                        </div>
+
+                        <div class="person-group">
+                            <div class="role-tag" data-en="Bride" data-ko="신부">Bride</div>
+                            <div class="name">Mary Hyojin Park</div>
+                            <div class="parents">
+                                <span data-en="Daughter of Jong Eil Park & Yong Ran Lee" data-ko="박종일 · 이용란의 딸">Daughter of Jong Eil Park & Yong Ran Lee</span>
+                            </div>
+                            <div class="person-photo-box" onclick="openLightbox('images/bride.jpg')">
+                                <img src="images/bride.jpeg" alt="Mary Hyojin Park" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 3: Date Highlight -->
+            <section class="snap-section page-section date-highlight-section">
+                <div class="section-inner date-highlight-inner">
+                    <div class="page3-title" data-en="WEDDING DAY" data-ko="예식 일시">WEDDING DAY</div>
+
+                    <div class="date-highlight-header">
+                        <div class="date-line-lg" data-en="Sun, March 07, 2027" data-ko="2027년 3월 07일 일요일">
+                            Sun, March 07, 2027
+                        </div>
+                        <div class="date-subtitle-kr" data-en="5:00 PM" data-ko="오후 5시">
+                            오후 5시
+                        </div>
+                    </div>
+
+                    <div class="date-center-photo-wrap" onclick="openLightbox('images/0307.jpg')">
+                        <img src="images/0307.jpeg" alt="0307 Wedding Day Photo" class="date-center-photo" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80'">
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- PAGE 4: 웨딩 달력 & 카운트다운 화면 -->
+            <section class="snap-section page-section calendar-section">
+                <div class="section-inner">
+                    <div class="page3-title">WEDDING DAY</div>
+                    
+                    <div class="date-subtitle-kr" data-en="Sunday, March 07, 2027 | PM 5:00" data-ko="2027년 3월 07일 일요일 | 오후 5시">
+                        2027년 3월 07일 일요일 | 오후 5시
+                    </div>
+
+                    <!-- 2027년 3월 미니 달력 -->
+                    <div class="wedding-calendar">
+                        <div class="cal-month-title">2027. 03</div>
+                        <div class="cal-header">
+                            <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+                        </div>
+                        <div class="cal-grid">
+                            <span class="empty"></span>
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+                            <span class="cal-target">7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+                            <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+                            <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
+                            <span>28</span><span>29</span><span>30</span><span>31</span>
+                        </div>
+                    </div>
+
+                    <!-- 하단 카운트다운 박스 -->
+                    <div class="dday-grid-boxes">
+                        <div class="dday-box">
+                            <span id="daysNum" class="d-num">00</span>
+                            <span class="d-lbl">DAYS</span>
+                        </div>
+                        <div class="dday-box">
+                            <span id="hoursNum" class="d-num">00</span>
+                            <span class="d-lbl">HOURS</span>
+                        </div>
+                        <div class="dday-box">
+                            <span id="minsNum" class="d-num">00</span>
+                            <span class="d-lbl">MINUTES</span>
+                        </div>
+                        <div class="dday-box">
+                            <span id="secsNum" class="d-num">00</span>
+                            <span class="d-lbl">SECONDS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 5: Location & Embedded Google Map -->
+            <section class="snap-section page-section location-section">
+                <div class="section-inner" style="max-width: 380px; width: 100%;">
+                    <div class="page3-title" data-en="LOCATION" data-ko="오시는 길">LOCATION</div>
+
+                    <div class="venue-info-box">
+                        <div class="venue-name" data-en="St. Gabriel Korean Catholic Church" data-ko="성가브리엘 한인천주교회">
+                            St. Gabriel Korean Catholic Church
+                        </div>
+                        <div class="venue-address">
+                            2035 Otterbein Ave, Rowland Heights, CA 91748
+                        </div>
+                    </div>
+
+                    <div class="google-map-box">
+                        <iframe
+                            title="St. Gabriel Korean Catholic Church Map"
+                            src="https://maps.google.com/maps?q=2035%20Otterbein%20Ave,%20Rowland%20Heights,%20CA%2091748&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="map-btn-group">
+                        <a href="https://maps.google.com/?q=2035+Otterbein+Ave,+Rowland+Heights,+CA+91748" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="map-btn" 
+                           data-en="Google Maps" 
+                           data-ko="구글 맵">
+                            Google Maps
+                        </a>
+                        <a href="https://maps.apple.com/?q=2035+Otterbein+Ave,+Rowland+Heights,+CA+91748" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="map-btn apple-map-btn" 
+                           data-en="Apple Maps" 
+                           data-ko="애플 맵">
+                            Apple Maps
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PAGE 6: Photo Gallery (자바스크립트 루프로 자동 생성되는 갤러리) -->
+            <section class="snap-section page-section gallery-section">
+                <div class="section-inner" style="max-width: 380px; width: 100%;">
+                    <div class="page3-title" data-en="PHOTO GALLERY" data-ko="우리의 아름다운 순간들">PHOTO GALLERY</div>
+                    
+                    <!-- 갤러리 슬라이더 컨테이너 (JS가 자동으로 채움) -->
+                    <div class="gallery-slider-container">
+                        <div class="gallery-track" id="galleryTrack">
+                            <!-- JS 루프를 통해 2장씩 묶여서 동적 생성됩니다 -->
+                        </div>
+                    </div>
+
+                    <!-- 네비게이션 버튼 및 페이지 인디케이터 -->
+                    <div class="gallery-nav-bar">
+                        <button class="gallery-nav-btn" onclick="prevGallerySlide()">&#10094;</button>
+                        <span id="galleryPageIndicator" class="gallery-indicator">1 / 1</span>
+                        <button class="gallery-nav-btn" onclick="nextGallerySlide()">&#10095;</button>
+                    </div>
+                </div>
+                <div class="gallery-tip-box"
+                    data-en="Tap any photo to view in full screen."
+                    data-ko="사진을 누르시면 크게 확대되어 열립니다.">
+                    사진을 누르시면 크게 확대되어 열립니다.
+                </div>                
+            </section>
+            <!-- PAGE 7: Guestbook Message (축하 방명록) -->
+            <section class="snap-section page-section message-section">
+                <div class="section-inner message-inner" style="max-width: 380px; width: 100%;">
+                    <div class="message-header">
+                        <div class="message-main-title">MESSAGE</div>
+                        <div class="message-sub-title" data-en="Leave a warm message for our new beginning" data-ko="저희 둘에게 따뜻한 방명록을 남겨주세요">
+                            저희 둘에게 따뜻한 방명록을 남겨주세요
+                        </div>
+                    </div>
+
+                    <!-- 방명록 카드 리스트 (스크롤 가능 영역) -->
+                    <div class="message-list-container" id="messageList">
+                        <!-- JS가 방명록 카드를 자동으로 렌더링합니다 -->
+                    </div>
+
+                    <!-- 하단 메시지 남기기 버튼 -->
+                    <button type="button" class="write-msg-open-btn" onclick="openMessageModal()" data-en="Leave a Message" data-ko="메시지 남기기">
+                        메시지 남기기
+                    </button>
+                </div>
+            </section>
+            <!-- PAGE 8: RSVP (참석 여부 전달 - 감사 인사 직전 페이지) -->
+            <section class="snap-section page-section rsvp-section">
+                <div class="section-inner rsvp-inner">
+                    <div class="rsvp-header">
+                        <div class="message-main-title">RSVP</div>
+                        <div class="rsvp-date-line">2027 &nbsp;|&nbsp; 03 &nbsp;|&nbsp; 07</div>
+                        <div class="message-sub-title"
+                             data-en="Please let us know if you can join us"
+                             data-ko="참석 여부를 미리 알려주시면 감사하겠습니다">
+                            참석 여부를 미리 알려주시면 감사하겠습니다
+                        </div>
+                    </div>
+
+                    <form id="rsvpForm" class="rsvp-form-card" onsubmit="submitRsvp(event)">
+                        <!-- 1. 구분 (신랑측 / 신부측) -->
+                        <div class="rsvp-row">
+                            <label class="rsvp-label" data-en="Side" data-ko="구분">구분</label>
+                            <div class="rsvp-toggle-group" id="rsvpSideGroup">
+                                <button type="button" class="rsvp-opt-btn active" data-value="신랑측" onclick="selectRsvpOption('side', this)" data-en="Groom" data-ko="신랑측">신랑측</button>
+                                <button type="button" class="rsvp-opt-btn" data-value="신부측" onclick="selectRsvpOption('side', this)" data-en="Bride" data-ko="신부측">신부측</button>
+                            </div>
+                        </div>
+
+                        <!-- 2. 성함 -->
+                        <div class="rsvp-row">
+                            <label class="rsvp-label" for="rsvpName" data-en="Name" data-ko="성함">성함</label>
+                            <input type="text" 
+                                id="rsvpName" 
+                                class="rsvp-line-input" 
+                                data-en-placeholder="Enter your full name" 
+                                data-ko-placeholder="성함을 입력해 주세요" 
+                                placeholder="성함을 입력해 주세요" 
+                                required>
+                        </div>
+
+                        <!-- 4. 동행인 -->
+                        <div class="rsvp-row" id="companionRow">
+                            <label class="rsvp-label" for="rsvpCompanion" data-en="Companion" data-ko="동행인">동행인</label>
+                            <input type="text" 
+                                id="rsvpCompanion" 
+                                class="rsvp-line-input" 
+                                data-en-placeholder="Available for 2+ guests" 
+                                data-ko-placeholder="참석인원 2명 이상 시 입력 가능" 
+                                placeholder="참석인원 2명 이상 시 입력 가능" 
+                                disabled>
+                        </div>
+
+                        <!-- 3. 참석인원 -->
+                        <div class="rsvp-row">
+                            <label class="rsvp-label" for="rsvpCount" data-en="Guests" data-ko="참석인원">참석인원</label>
+                            <input type="number" id="rsvpCount" class="rsvp-line-input" min="1" max="10" value="1" oninput="handleGuestCountChange()" required>
+                        </div>
+                        <!-- 5. 식사여부 -->
+                        <div class="rsvp-row">
+                            <label class="rsvp-label" data-en="Meal" data-ko="식사여부">식사여부</label>
+                            <div class="rsvp-toggle-group" id="rsvpMealGroup">
+                                <button type="button" class="rsvp-opt-btn active" data-value="예정" onclick="selectRsvpOption('meal', this)" data-en="Yes" data-ko="예정">예정</button>
+                                <button type="button" class="rsvp-opt-btn" data-value="안함" onclick="selectRsvpOption('meal', this)" data-en="No" data-ko="안함">안함</button>
+                                <button type="button" class="rsvp-opt-btn" data-value="미정" onclick="selectRsvpOption('meal', this)" data-en="TBD" data-ko="미정">미정</button>
+                            </div>
+                        </div>
+
+                        <!-- 꽉 찬 전달하기 버튼 -->
+                        <button type="submit" id="rsvpSubmitBtn" class="rsvp-submit-btn" data-en="Submit RSVP" data-ko="전달하기">
+                            전달하기
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- PAGE 9: Closing Thank You Section (마지막 장: 흑백 사진 배경 + 감사 인사) -->
+            <section class="snap-section closing-section">
+                <!-- 배경 흑백 사진 (images/ending-bw.jpg 넣어주시면 됩니다) -->
+                <img src="images/ending-bw.jpeg" alt="Paul & Mary Closing Photo" class="closing-bg-img" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'">
+                
+                <!-- 가독성을 살려주는 감성 다크 그라데이션 오버레이 -->
+                <div class="closing-overlay"></div>
+
+                <!-- 감사 인사 텍스트 영역 -->
+                <div class="closing-content">
+                    <div class="closing-badge" data-en="THANK YOU" data-ko="감사 인사">THANK YOU</div>
+                    
+                    <h2 class="closing-headline" 
+                        data-en="Forever starts with you by our side." 
+                        data-ko="저희의 새로운 시작을 함께해 주셔서 감사합니다.">
+                        Forever starts with you by our side.
+                    </h2>
+
+                    <div class="closing-divider"></div>
+
+                    <p class="closing-message" 
+                       data-en="Your presence, warm wishes, and love mean the world to us as we begin this new chapter together. We will cherish these memories forever and live happily ever after." 
+                       data-ko="바쁘신 중에도 귀한 걸음으로 저희 두 사람의 앞날을 축복해 주셔서 진심으로 감사드립니다. 보내주신 따뜻한 마음과 사랑 오래도록 간직하며 예쁘게 잘 살겠습니다.">
+                        Your presence, warm wishes, and love mean the world to us as we begin this new chapter together. We will cherish these memories forever and live happily ever after.
+                    </p>
+
+                    <div class="closing-signature">
+                        Paul &amp; Mary
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+    <!-- ==========================================
+         PHOTO LIGHTBOX MODAL (사진 확대 보기 레이어)
+         ========================================== -->
+         <div id="photoLightbox" class="lightbox-modal" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightboxImg" alt="Enlarged Wedding Photo">
+        </div>
+    
+        <!-- Audio Elements -->
+        <audio id="typeSound" src="sound/Typewriting.mp3" preload="auto"></audio>
+        <audio id="bgmSound" src="sound/Until_I_Found_You.mp3" preload="auto" loop></audio>
+    
+        <!-- Master Controller Script -->
+        <script src="main.js"></script>
+
+    <!-- ==========================================
+         MESSAGE WRITE MODAL (축하 메시지 작성 팝업)
+         ========================================== -->
+         <div id="messageModal" class="msg-modal-overlay" onclick="handleModalOverlayClick(event)">
+            <div class="msg-modal-card">
+                <button type="button" class="msg-modal-close" onclick="closeMessageModal()">&times;</button>
+                
+                <div class="msg-modal-title" data-en="Write a Congratulatory Message" data-ko="축하 메시지 작성하기">
+                    축하 메시지 작성하기
+                </div>
+                <div class="msg-modal-subtitle" data-en="Celebrate our wedding together" data-ko="저희 둘의 결혼을 함께 축하해 주세요">
+                    저희 둘의 결혼을 함께 축하해 주세요
+                </div>
+    
+                <form id="messageForm" onsubmit="submitGuestMessage(event)">
+                    <input 
+                        type="text" 
+                        id="guestNameInput" 
+                        class="msg-input" 
+                        maxlength="20"
+                        placeholder="성함을 남겨주세요 / Your Name" 
+                        required>
+    
+                    <div class="msg-textarea-wrap">
+                        <textarea 
+                            id="guestContentInput" 
+                            class="msg-textarea" 
+                            maxlength="200" 
+                            placeholder="200자 이내로 작성해 주세요 / Write within 200 characters" 
+                            oninput="updateCharCount()"
+                            required></textarea>
+                        <span id="msgCharCount" class="msg-char-count">0 / 200</span>
+                    </div>
+    
+                    <button type="submit" class="msg-submit-btn" data-en="Submit" data-ko="작성 완료">
+                        작성 완료
+                    </button>
+                </form>
+            </div>
+        </div>
+    
+    </body>
+    </html>
+    
