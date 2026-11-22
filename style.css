@@ -2241,3 +2241,55 @@ body {
     color: #7A6352;
     text-align: center;
 }
+/* ==========================================
+   WEDDING DAY SECTION: 사진 세로 길이 축소 및 하단 마진 정렬
+   ========================================== */
+   .wedding-day-section .dday-photo-box,
+   .wedding-day-section .wedding-day-photo-box,
+   .wedding-day-section .photo-frame,
+   .wedding-day-section .dday-image-wrap {
+       width: 100% !important;
+       height: 400px !important;
+       max-height: 400px !important;
+       overflow: hidden !important;
+       border-radius: 16px !important;
+       margin-top: 16px !important;
+       margin-bottom: 0 !important;
+   }
+   
+   .wedding-day-section .dday-photo-box img,
+   .wedding-day-section .wedding-day-photo-box img,
+   .wedding-day-section .photo-frame img,
+   .wedding-day-section .dday-image-wrap img,
+   .wedding-day-section img {
+       width: 100% !important;
+       height: 400px !important;
+       max-height: 400px !important;
+       object-fit: cover !important;
+       object-position: center 35% !important;
+       display: block !important;
+       border-radius: 16px !important;
+   }
+   /* ==========================================
+   DATE HIGHLIGHT (WEDDING DAY): 사진 세로 축소 및 하단 마진 맞춤
+   ========================================== */
+.date-highlight-section .date-center-photo-wrap {
+    width: 100% !important;
+    height: 400px !important;
+    max-height: 400px !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    margin-top: 16px !important;
+    margin-bottom: 0 !important;
+}
+
+.date-highlight-section .date-center-photo-wrap img,
+.date-highlight-section .date-center-photo {
+    width: 100% !important;
+    height: 400px !important;
+    max-height: 400px !important;
+    object-fit: cover !important;
+    object-position: center 32% !important;
+    display: block !important;
+    border-radius: 16px !important;
+}

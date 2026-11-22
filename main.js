@@ -261,16 +261,16 @@ function updateTexts() {
   if (introNamesEl) {
     introNamesEl.innerHTML =
       currentLang === "ko"
-        ? '박효진 <span class="intro-amp">&</span> 이태현'
-        : 'Mary Hyojin Park <span class="intro-amp">&</span> Paul Taehyun Lee';
+        ? '이태현 <span class="intro-amp">&</span> 박효진'
+        : 'Paul Taehyun Lee <span class="intro-amp">&</span> Mary Hyojin Park';
   }
 
   const invitationNamesEl = document.getElementById("invitationNames");
   if (invitationNamesEl) {
     invitationNamesEl.innerHTML =
       currentLang === "ko"
-        ? '박효진 <span class="intro-amp">&</span> 이태현'
-        : 'Mary Hyojin Park <span class="intro-amp">&</span> Paul Taehyun Lee';
+        ? '이태현 <span class="intro-amp">&</span> 박효진'
+        : 'Paul Taehyun Lee <span class="intro-amp">&</span> Mary Hyojin Park';
   }
 }
 
@@ -302,8 +302,8 @@ function updateIntroTexts() {
   if (introNamesEl) {
     introNamesEl.innerHTML =
       introLang === "ko"
-        ? '박효진 <span class="intro-amp">&</span> 이태현'
-        : 'Mary Hyojin Park <span class="intro-amp">&</span> Paul Taehyun Lee';
+        ? '이태현 <span class="intro-amp">&</span> 박효진'
+        : 'Paul Taehyun Lee <span class="intro-amp">&</span> Mary Hyojin Park';
   }
 }
 

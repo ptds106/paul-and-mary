@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
 
 </head>
 <body>
@@ -31,7 +31,7 @@
 
                 <div class="intro-subtitle" data-en="THE WEDDING OF" data-ko="소중한 두 사람의 결혼식">THE WEDDING OF</div>
                 <h1 class="intro-names" id="introNames">
-                    박효진 <span class="intro-amp">&</span> 이태현
+                    이태현 <span class="intro-amp">&</span> 박효진
                 </h1>
                 
                 <div class="intro-controls-row">
@@ -107,7 +107,7 @@
                             <div class="role-tag" data-en="Groom" data-ko="신랑">Groom</div>
                             <div class="name" data-en="Paul Taehyun Lee" data-ko="이태현">Paul Taehyun Lee</div>
                             <div class="parents">
-                                <span data-en="Son of Jason Dongjin Lee<br>&amp; Ae Sook Lee" data-ko="이동진 · 이애숙의 아들">Son of Jason Dongjin Lee & Ae Sook Lee</span>
+                                <span data-en="Son of<br>· Jason Dongjin Lee<br>· Ae Sook Lee" data-ko="이동진 · 이애숙의 아들">Son of Jason Dongjin & Lee Ae Sook Lee</span>
                             </div>
                             <div class="person-photo-box">
                                 <img src="images/groom.jpeg" alt="Paul Taehyun Lee" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80'">
@@ -118,7 +118,7 @@
                             <div class="role-tag" data-en="Bride" data-ko="신부">Bride</div>
                             <div class="name" data-en="Mary Hyojin Park" data-ko="박효진">Mary Hyojin Park</div>
                             <div class="parents">
-                                <span data-en="Daughter of Jong Eil Park<br>&amp; Yong Nan Lee" data-ko="박종일 · 이용란의 딸">Daughter of Jong Eil Park & Yong Ran Lee</span>
+                                <span data-en="Daughter of<br>· Jong Eil Park<br>· Yong Nan Lee" data-ko="박종일 · 이용란의 딸">Daughter of Jong Eil Park & Yong Ran Lee</span>
                             </div>
                             <div class="person-photo-box" >
                                 <img src="images/bride.jpeg" alt="Mary Hyojin Park" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80'">
@@ -139,6 +139,24 @@
                         </div>
                         <div class="date-subtitle-kr" data-en="5:00 PM" data-ko="오후 5시">
                             오후 5시
+                        </div>
+                        <div class="dday-grid-boxes">
+                            <div class="dday-box">
+                                <span id="daysNum" class="d-num">00</span>
+                                <span class="d-lbl">DAYS</span>
+                            </div>
+                            <div class="dday-box">
+                                <span id="hoursNum" class="d-num">00</span>
+                                <span class="d-lbl">HOURS</span>
+                            </div>
+                            <div class="dday-box">
+                                <span id="minsNum" class="d-num">00</span>
+                                <span class="d-lbl">MINUTES</span>
+                            </div>
+                            <div class="dday-box">
+                                <span id="secsNum" class="d-num">00</span>
+                                <span class="d-lbl">SECONDS</span>
+                            </div>
                         </div>
                     </div>
 
@@ -410,7 +428,7 @@
         <audio id="bgmSound" src="sound/Until_I_Found_You.mp3" preload="auto" loop></audio>
     
         <!-- Master Controller Script -->
-        <script src="main.js?v=3"></script>
+        <script src="main.js?v=4"></script>
     <!-- ==========================================
          MESSAGE WRITE MODAL (축하 메시지 작성 팝업)
          ========================================== -->
