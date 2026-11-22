@@ -60,7 +60,7 @@ const typewriterStrings = {
   en: "Paul & Mary are getting married.",
 };
 
-const cursiveString = "Welcome to our wedding";
+const cursiveString = "";
 
 let typingTimeout;
 let cursiveTimeout;

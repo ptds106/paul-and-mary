@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261121">
+    <link rel="stylesheet" href="style.css?v=3">
 
 </head>
 <body>
@@ -34,9 +34,6 @@
                     박효진 <span class="intro-amp">&</span> 이태현
                 </h1>
                 
-                
-                <div class="intro-date">Saturday, Nov 7, 2026</div>
-
                 <div class="intro-controls-row">
                     <button type="button" class="sound-toggle-pill" id="introSoundBtn" onclick="toggleIntroSound()">
                         <span id="introSoundIcon">🔊</span> 
@@ -110,7 +107,7 @@
                             <div class="role-tag" data-en="Groom" data-ko="신랑">Groom</div>
                             <div class="name" data-en="Paul Taehyun Lee" data-ko="이태현">Paul Taehyun Lee</div>
                             <div class="parents">
-                                <span data-en="Son of Jason Dongjin Lee & Ae Sook Lee" data-ko="이동진 · 이애숙의 아들">Son of Jason Dongjin Lee & Ae Sook Lee</span>
+                                <span data-en="Son of Jason Dongjin Lee<br>&amp; Ae Sook Lee" data-ko="이동진 · 이애숙의 아들">Son of Jason Dongjin Lee & Ae Sook Lee</span>
                             </div>
                             <div class="person-photo-box">
                                 <img src="images/groom.jpeg" alt="Paul Taehyun Lee" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80'">
@@ -121,7 +118,7 @@
                             <div class="role-tag" data-en="Bride" data-ko="신부">Bride</div>
                             <div class="name" data-en="Mary Hyojin Park" data-ko="박효진">Mary Hyojin Park</div>
                             <div class="parents">
-                                <span data-en="Daughter of Jong Eil Park & Yong Ran Lee" data-ko="박종일 · 이용란의 딸">Daughter of Jong Eil Park & Yong Ran Lee</span>
+                                <span data-en="Daughter of Jong Eil Park<br>&amp; Yong Nan Lee" data-ko="박종일 · 이용란의 딸">Daughter of Jong Eil Park & Yong Ran Lee</span>
                             </div>
                             <div class="person-photo-box" >
                                 <img src="images/bride.jpeg" alt="Mary Hyojin Park" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80'">
@@ -153,16 +150,16 @@
 
 
             <!-- PAGE 4: 웨딩 달력 & 카운트다운 화면 -->
-            <section class="snap-section page-section calendar-section">
+            <!-- <section class="snap-section page-section calendar-section">
                 <div class="section-inner">
                     <div class="page3-title">WEDDING DAY</div>
                     
                     <div class="date-subtitle-kr" data-en="Sunday, March 07, 2027 | PM 5:00" data-ko="2027년 3월 07일 일요일 | 오후 5시">
                         2027년 3월 07일 일요일 | 오후 5시
                     </div>
-
+ -->
                     <!-- 2027년 3월 미니 달력 -->
-                    <div class="wedding-calendar">
+                    <!-- <div class="wedding-calendar">
                         <div class="cal-month-title">2027. 03</div>
                         <div class="cal-header">
                             <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
@@ -175,10 +172,10 @@
                             <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
                             <span>28</span><span>29</span><span>30</span><span>31</span>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- 하단 카운트다운 박스 -->
-                    <div class="dday-grid-boxes">
+                    <!-- <div class="dday-grid-boxes">
                         <div class="dday-box">
                             <span id="daysNum" class="d-num">00</span>
                             <span class="d-lbl">DAYS</span>
@@ -197,7 +194,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
             <!-- PAGE 5: Location & Embedded Google Map -->
             <section class="snap-section page-section location-section">
@@ -209,7 +206,7 @@
                             St. Gabriel Korean Catholic Church
                         </div>
                         <div class="venue-address">
-                            2035 Otterbein Ave, Rowland Heights, CA 91748
+                            2035 S Otterbein Ave, Rowland Heights, CA 91748
                         </div>
                     </div>
 
@@ -294,7 +291,8 @@
                     </button>
                 </div>
             </section>
-            <!-- PAGE 8: RSVP (참석 여부 전달 - 감사 인사 직전 페이지) -->
+            
+            <!-- PAGE 8: RSVP (참석 여부 전달 - 감사 인사 직전 페이지)
             <section class="snap-section page-section rsvp-section">
                 <div class="section-inner rsvp-inner">
                     <div class="rsvp-header">
@@ -309,16 +307,16 @@
 
                     <form id="rsvpForm" class="rsvp-form-card" onsubmit="submitRsvp(event)">
                         <!-- 1. 구분 (신랑측 / 신부측) -->
-                        <div class="rsvp-row">
+                        <!-- <div class="rsvp-row">
                             <label class="rsvp-label" data-en="Side" data-ko="구분">구분</label>
                             <div class="rsvp-toggle-group" id="rsvpSideGroup">
                                 <button type="button" class="rsvp-opt-btn active" data-value="신랑측" onclick="selectRsvpOption('side', this)" data-en="Groom" data-ko="신랑측">신랑측</button>
                                 <button type="button" class="rsvp-opt-btn" data-value="신부측" onclick="selectRsvpOption('side', this)" data-en="Bride" data-ko="신부측">신부측</button>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- 2. 성함 -->
-                        <div class="rsvp-row">
+                        <!-- <div class="rsvp-row">
                             <label class="rsvp-label" for="rsvpName" data-en="Name" data-ko="성함">성함</label>
                             <input type="text" 
                                 id="rsvpName" 
@@ -330,7 +328,7 @@
                         </div>
 
                         <!-- 4. 동행인 -->
-                        <div class="rsvp-row" id="companionRow">
+                        <!-- <div class="rsvp-row" id="companionRow">
                             <label class="rsvp-label" for="rsvpCompanion" data-en="Companion" data-ko="동행인">동행인</label>
                             <input type="text" 
                                 id="rsvpCompanion" 
@@ -339,30 +337,30 @@
                                 data-ko-placeholder="참석인원 2명 이상 시 입력 가능" 
                                 placeholder="참석인원 2명 이상 시 입력 가능" 
                                 disabled>
-                        </div>
+                        </div> --> -->
 
                         <!-- 3. 참석인원 -->
-                        <div class="rsvp-row">
+                        <!-- <div class="rsvp-row">
                             <label class="rsvp-label" for="rsvpCount" data-en="Guests" data-ko="참석인원">참석인원</label>
                             <input type="number" id="rsvpCount" class="rsvp-line-input" min="1" max="10" value="1" oninput="handleGuestCountChange()" required>
                         </div>
                         <!-- 5. 식사여부 -->
-                        <div class="rsvp-row">
+                        <!-- <div class="rsvp-row">
                             <label class="rsvp-label" data-en="Meal" data-ko="식사여부">식사여부</label>
                             <div class="rsvp-toggle-group" id="rsvpMealGroup">
                                 <button type="button" class="rsvp-opt-btn active" data-value="예정" onclick="selectRsvpOption('meal', this)" data-en="Yes" data-ko="예정">예정</button>
                                 <button type="button" class="rsvp-opt-btn" data-value="안함" onclick="selectRsvpOption('meal', this)" data-en="No" data-ko="안함">안함</button>
                                 <button type="button" class="rsvp-opt-btn" data-value="미정" onclick="selectRsvpOption('meal', this)" data-en="TBD" data-ko="미정">미정</button>
                             </div>
-                        </div>
+                        </div> --> -->
 
                         <!-- 꽉 찬 전달하기 버튼 -->
-                        <button type="submit" id="rsvpSubmitBtn" class="rsvp-submit-btn" data-en="Submit RSVP" data-ko="전달하기">
+                        <!-- <button type="submit" id="rsvpSubmitBtn" class="rsvp-submit-btn" data-en="Submit RSVP" data-ko="전달하기">
                             전달하기
                         </button>
                     </form>
                 </div>
-            </section>
+            </section> --> -->
 
             <!-- PAGE 9: Closing Thank You Section (마지막 장: 흑백 사진 배경 + 감사 인사) -->
             <section class="snap-section closing-section">
@@ -412,7 +410,7 @@
         <audio id="bgmSound" src="sound/Until_I_Found_You.mp3" preload="auto" loop></audio>
     
         <!-- Master Controller Script -->
-        <script src="main.js?v=20261121"></script>
+        <script src="main.js?v=3"></script>
     <!-- ==========================================
          MESSAGE WRITE MODAL (축하 메시지 작성 팝업)
          ========================================== -->
