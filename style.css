@@ -1977,3 +1977,284 @@ body {
     font-weight: 300 !important;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
 }
+/* ==========================================
+   LAST SECTION & MOBILE OVERSCROLL / SNAP FIX
+   ========================================== */
+   #invitationContainer {
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.snap-section {
+    min-height: 100dvh;
+    height: 100dvh;
+    box-sizing: border-box;
+    overflow: hidden;
+    scroll-snap-stop: always;
+}
+
+/* 마지막 섹션(클로징/사진 섹션)이 화면 높이를 넘쳐서 바닥 여백·밀림 생기는 것 방지 */
+.snap-section:last-of-type {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+}
+
+.snap-section:last-of-type img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* ==========================================
+   MESSAGE SECTION: ONE-SCREEN FIT, BOTTOM BUTTON & HORIZONTAL PAGING
+   ========================================== */
+   .message-section {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding: 28px 20px 26px !important;
+    box-sizing: border-box !important;
+}
+
+.message-section .section-header {
+    margin-bottom: 10px !important;
+    flex-shrink: 0;
+}
+
+/* 가로 페이지 트랙 (갤러리처럼 옆으로 밀리는 구조) */
+.msg-pages-viewport {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+.msg-pages-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.msg-page-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 4px 2px;
+    box-sizing: border-box;
+}
+
+/* 한 화면에 2개가 여유롭게 들어가도록 카드 크기/여백 조정 */
+.message-section .guest-msg-card {
+    padding: 13px 15px !important;
+    margin: 0 !important;
+    border-radius: 14px !important;
+}
+
+.message-section .guest-msg-text {
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.message-section .guest-msg-footer {
+    margin-top: 8px !important;
+    font-size: 0.78rem !important;
+}
+
+/* 페이지 인디케이터 (페이지가 2장 이상일 때만 표시) */
+.msg-pagination-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 8px 0 10px;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: #7A6352;
+}
+
+.msg-page-btn {
+    background: transparent;
+    border: 1px solid rgba(158, 126, 100, 0.45);
+    color: #9E7E64;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+/* 하단 버튼: 버튼 세로 높이만큼 위 공간을 확보하고 아랫단에 딱 맞춤 */
+.message-section .msg-bottom-action,
+.message-section button[onclick*="openMessageModal"] {
+    flex-shrink: 0;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 4px !important;
+    margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
+}
+/* ==========================================
+   MESSAGE SECTION: 상단/하단 여백 대칭 고정 & 버튼 화면 안쪽 정렬
+   ========================================== */
+   .message-section,
+   .message-section .section-card,
+   .message-section .invitation-card {
+       height: 100dvh !important;
+       min-height: 100dvh !important;
+       max-height: 100dvh !important;
+       padding: 24px 20px !important;
+       box-sizing: border-box !important;
+       overflow: hidden !important;
+       display: flex !important;
+       flex-direction: column !important;
+       justify-content: space-between !important;
+   }
+   
+   .message-section .section-header {
+       margin: 0 0 12px 0 !important;
+       flex-shrink: 0 !important;
+   }
+   
+   /* flex: 1로 바닥까지 밀어내던 속성 해제 -> 카드 2개 높이에 맞춰 컴팩트하게 유지 */
+   .msg-pages-viewport {
+       position: relative;
+       width: 100%;
+       flex: 0 0 auto !important;
+       height: auto !important;
+       overflow: hidden;
+       touch-action: pan-y;
+   }
+   
+   .msg-pages-track {
+       display: flex;
+       width: 100%;
+       transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+       will-change: transform;
+   }
+   
+   .msg-page-slide {
+       flex: 0 0 100%;
+       width: 100%;
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+       padding: 2px;
+       box-sizing: border-box;
+   }
+   
+   .message-section .guest-msg-card {
+       padding: 12px 15px !important;
+       margin: 0 !important;
+       border-radius: 14px !important;
+   }
+   
+   .message-section .guest-msg-text {
+       font-size: 0.9rem !important;
+       line-height: 1.45 !important;
+       display: -webkit-box;
+       -webkit-line-clamp: 3;
+       -webkit-box-orient: vertical;
+       overflow: hidden;
+   }
+   
+   .message-section .guest-msg-footer {
+       margin-top: 6px !important;
+       font-size: 0.78rem !important;
+   }
+   
+   .msg-pagination-bar {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       gap: 14px;
+       margin: 8px 0 0 !important;
+       flex-shrink: 0 !important;
+       font-family: 'Cormorant Garamond', serif;
+       font-size: 0.95rem;
+       color: #7A6352;
+   }
+   
+   .msg-page-btn {
+       background: transparent;
+       border: 1px solid rgba(158, 126, 100, 0.45);
+       color: #9E7E64;
+       border-radius: 999px;
+       padding: 3px 10px;
+       font-size: 0.8rem;
+       cursor: pointer;
+   }
+   
+   /* 버튼이 바닥에 닿지 않고 위쪽 여백(24px)과 똑같이 아래 여백(24px)을 남기도록 고정 */
+   .message-section .msg-bottom-action,
+   .message-section button[onclick*="openMessageModal"] {
+       flex-shrink: 0 !important;
+       width: 100% !important;
+       height: 48px !important;
+       min-height: 48px !important;
+       margin: 0 0 28px 0 !important;
+   }
+   /* ==========================================
+   MESSAGE PUBLIC / PRIVATE TOGGLE & LOCK BADGE
+   ========================================== */
+.msg-privacy-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.privacy-opt-btn {
+    flex: 1;
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(158, 126, 100, 0.35);
+    background: #FAF7F4;
+    color: #7A6352;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.privacy-opt-btn.active {
+    background: #9E7E64;
+    border-color: #9E7E64;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.msg-lock-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 5px;
+    font-size: 0.85em;
+    vertical-align: middle;
+}
+
+.guest-msg-text.is-private-hidden {
+    color: #9A8B80 !important;
+    font-style: italic;
+}
+.parking-notice {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #7A6352;
+    text-align: center;
+}

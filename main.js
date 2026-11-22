@@ -4,15 +4,13 @@ let isSoundOn = true;
 let introLang = "en";
 let introSound = true;
 
-// main.js 파일 안의 toggleIntroLanguage 및 updateIntroTexts 함수 부분 수정
-
 // 인트로 화면 언어 토글 (영어 모드일 때는 "한글", 한국어 모드일 때는 "ENG" 표시)
 function toggleIntroLanguage() {
   introLang = introLang === "en" ? "ko" : "en";
-  updateIntroTexts(); // 국기와 텍스트가 양쪽 모두 완벽하게 갱신되도록 함수 호출
+  updateIntroTexts();
 }
 
-// 페이지가 처음 로드될 때 인트로 텍스트와 버튼 라벨을 초기 상태(영어 모드 + "한글" 버튼 텍스트)로 정확히 세팅
+// 페이지가 처음 로드될 때 인트로 텍스트와 버튼 라벨 세팅
 window.onload = function () {
   updateIntroTexts();
 };
@@ -30,15 +28,14 @@ function toggleIntroSound() {
     soundLabel.innerText = introLang === "ko" ? "소리: 꺼짐" : "Sound: Off";
   }
 }
+
 function enterInvitation() {
   currentLang = introLang;
   isSoundOn = introSound;
 
-  // 인트로 숨기고 메인 콘텐츠 표시
   document.getElementById("introScreen").style.display = "none";
   document.getElementById("mainContent").style.display = "block";
 
-  // 컨테이너 스크롤을 무조건 맨 위(0)로 강제 고정
   const container = document.getElementById("invitationContainer");
   if (container) {
     container.scrollTop = 0;
@@ -47,15 +44,15 @@ function enterInvitation() {
   updateTexts();
   startIntroAnimation();
   startWeddingCountdown();
-  initGallery(); //
-  renderGuestMessages(); // <-- 방명록 렌더링 추가
+  initGallery();
+  renderGuestMessages();
   handleGuestCountChange();
   initScrollCue();
 }
 
-// 새로고침 시 최상단으로 스크롤 초기화 및 인트로 유지
 window.onbeforeunload = function () {
-  document.getElementById("invitationContainer").scrollTop = 0;
+  const container = document.getElementById("invitationContainer");
+  if (container) container.scrollTop = 0;
 };
 
 const typewriterStrings = {
@@ -67,8 +64,7 @@ const cursiveString = "Welcome to our wedding";
 
 let typingTimeout;
 let cursiveTimeout;
-
-let bgmTimeout; // 상단 전역 변수에 없으면 함께 선언
+let bgmTimeout;
 
 function startIntroAnimation() {
   const targetEl = document.getElementById("typewriterText");
@@ -118,13 +114,11 @@ function startIntroAnimation() {
       charIndex++;
       typingTimeout = setTimeout(typeFirst, 130);
     } else {
-      // 1) 타자 소리 정지
       if (typeSound) {
         typeSound.pause();
         typeSound.currentTime = 0;
       }
 
-      // 2) 타자 끝난 시점 기준 정확히 1초(1000ms) 뒤 노래 시작
       bgmTimeout = setTimeout(() => {
         if (isSoundOn && bgmSound) {
           bgmSound.play().catch((e) => console.log("BGM play prevented:", e));
@@ -138,7 +132,6 @@ function startIntroAnimation() {
           textContainer.style.display = "none";
           photoFrame.classList.add("show");
 
-          // 3) 'Welcome to our wedding' 타이핑 속도 빠르게(40ms) 및 딜레이 단축(250ms)
           let cursiveIndex = 0;
           function typeCursive() {
             if (cursiveIndex < cursiveString.length) {
@@ -158,7 +151,6 @@ function startIntroAnimation() {
 }
 
 function startWeddingCountdown() {
-  // 2027년 3월 7일 오후 5시 기준 타임스탬프
   const weddingDate = new Date("March 7, 2027 17:00:00").getTime();
 
   function updateTimer() {
@@ -230,6 +222,7 @@ function toggleLanguage() {
   currentLang = currentLang === "en" ? "ko" : "en";
   updateTexts();
   startIntroAnimation();
+  renderGuestMessages();
 }
 
 function updateTexts() {
@@ -251,7 +244,7 @@ function updateTexts() {
       soundText.innerText = currentLang === "ko" ? "소리 꺼짐" : "Sound Off";
     }
   }
-  // updateTexts() 함수 내부 하단에 추가
+
   const nameInput = document.getElementById("rsvpName");
   if (nameInput) {
     nameInput.placeholder =
@@ -263,11 +256,26 @@ function updateTexts() {
   if (typeof handleGuestCountChange === "function") {
     handleGuestCountChange();
   }
+
+  const introNamesEl = document.getElementById("introNames");
+  if (introNamesEl) {
+    introNamesEl.innerHTML =
+      currentLang === "ko"
+        ? '박효진 <span class="intro-amp">&</span> 이태현'
+        : 'Mary Hyojin Park <span class="intro-amp">&</span> Paul Taehyun Lee';
+  }
+
+  const invitationNamesEl = document.getElementById("invitationNames");
+  if (invitationNamesEl) {
+    invitationNamesEl.innerHTML =
+      currentLang === "ko"
+        ? '박효진 <span class="intro-amp">&</span> 이태현'
+        : 'Mary Hyojin Park <span class="intro-amp">&</span> Paul Taehyun Lee';
+  }
 }
+
 function updateIntroTexts() {
   const langLabel = document.getElementById("introLangLabel");
-
-  // 영어 모드(en)일 때 다음 선택지인 "한글"과 태극기 표시, 한국어 모드(ko)일 때 "ENG"와 성조기 표시
   if (langLabel) {
     langLabel.innerHTML = introLang === "en" ? "🇰🇷 한글" : "🇺🇸 ENG";
   }
@@ -289,13 +297,21 @@ function updateIntroTexts() {
       ? "소리: 꺼짐"
       : "Sound: Off";
   }
+
+  const introNamesEl = document.getElementById("introNames");
+  if (introNamesEl) {
+    introNamesEl.innerHTML =
+      introLang === "ko"
+        ? '박효진 <span class="intro-amp">&</span> 이태현'
+        : 'Mary Hyojin Park <span class="intro-amp">&</span> Paul Taehyun Lee';
+  }
 }
+
 // ==========================================
 // 갤러리 자동 루프 생성 및 슬라이더 제어 로직
 // ==========================================
 let currentSlideIndex = 0;
 
-// 갤러리 자동 루프 생성 (클릭 시 확대되도록 onclick 추가)
 function initGallery() {
   const track = document.getElementById("galleryTrack");
   if (!track) return;
@@ -335,17 +351,47 @@ function initGallery() {
   updateGallerySlide();
 }
 
-// 라이트박스 열기 (사진 누를 때)
+let currentLightboxIndex = 1;
+const TOTAL_GALLERY_PHOTOS = 28;
+
 function openLightbox(imgSrc) {
+  if (!imgSrc || !imgSrc.includes("images/gallery/")) return;
+
   const modal = document.getElementById("photoLightbox");
   const modalImg = document.getElementById("lightboxImg");
-  if (modal && modalImg) {
-    modal.style.display = "flex";
-    modalImg.src = imgSrc;
+  if (!modal || !modalImg) return;
+
+  const match = imgSrc.match(/gallery-(\d+)\.jpeg/);
+  if (match) {
+    currentLightboxIndex = parseInt(match[1], 10);
+  }
+
+  modal.style.display = "flex";
+  modalImg.src = imgSrc;
+
+  if (!modalImg.dataset.nextBound) {
+    modalImg.style.cursor = "pointer";
+    modalImg.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nextLightboxPhoto();
+    });
+    modalImg.dataset.nextBound = "true";
   }
 }
 
-// 라이트박스 닫기 (배경이나 X 버튼 누를 때)
+function nextLightboxPhoto() {
+  const modalImg = document.getElementById("lightboxImg");
+  if (!modalImg) return;
+
+  currentLightboxIndex =
+    currentLightboxIndex >= TOTAL_GALLERY_PHOTOS ? 1 : currentLightboxIndex + 1;
+
+  const nextSrc = `images/gallery/gallery-${String(
+    currentLightboxIndex
+  ).padStart(2, "0")}.jpeg`;
+  modalImg.src = nextSrc;
+}
+
 function closeLightbox() {
   const modal = document.getElementById("photoLightbox");
   if (modal) {
@@ -360,7 +406,6 @@ function updateGallerySlide() {
 
   if (!track || totalGroups === 0) return;
 
-  // 사르르 넘어가는 슬라이드 트랙 이동
   track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
   if (indicator) {
@@ -382,28 +427,58 @@ function prevGallerySlide() {
   updateGallerySlide();
 }
 
-// 청첩장 입장 시 갤러리 초기화 함수도 함께 실행되도록 enterInvitation 함수 안에 initGallery(); 추가
 // ==========================================
-// GUESTBOOK MESSAGE (방명록 팝업 & 데이터 관리)
+// GUESTBOOK MESSAGE (방명록 팝업 & Public/Private 데이터 관리)
 // ==========================================
 const STORAGE_KEY = "paul_mary_wedding_messages";
+const MY_PRIVATE_IDS_KEY = "paul_mary_my_private_ids";
 
-// 기본 샘플 메시지 (DB 연결 전 화면 미리보기용)
+const MESSAGES_PER_PAGE = 2;
+let currentMsgPage = 0;
+let msgTouchStartX = 0;
+let isMessagePrivate = false;
+
 const defaultMessages = [
   {
+    id: "default-1",
     name: "홍길동",
     content:
       "결혼을 진심으로 축하한다!\n둘이 지금처럼 행복하게 백년해로하기를😍\n그림 같은 결혼식도 얼마나 예쁠지 벌써 기대된당 Happy Wedding🩷",
     createdAt: "2026.11.21 16:20",
+    isPrivate: false,
   },
   {
+    id: "default-2",
     name: "김철수",
     content: "결혼을 진심으로 축하드립니다!",
     createdAt: "2026.11.21 15:10",
+    isPrivate: false,
   },
 ];
 
-// 추후 백엔드(Firebase / Supabase) 연동 시 이 함수만 API 호출로 교체하면 됩니다.
+function getMyPrivateIds() {
+  try {
+    return JSON.parse(localStorage.getItem(MY_PRIVATE_IDS_KEY) || "[]");
+  } catch (e) {
+    return [];
+  }
+}
+
+function addMyPrivateId(id) {
+  const ids = getMyPrivateIds();
+  if (!ids.includes(id)) {
+    ids.push(id);
+    localStorage.setItem(MY_PRIVATE_IDS_KEY, JSON.stringify(ids));
+  }
+}
+
+function setMessagePrivacy(mode) {
+  isMessagePrivate = mode === "private";
+  document.querySelectorAll(".privacy-opt-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.privacy === mode);
+  });
+}
+
 async function fetchGuestMessages() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (!saved) {
@@ -413,15 +488,14 @@ async function fetchGuestMessages() {
   return JSON.parse(saved);
 }
 
-// 추후 백엔드 연동 시 이 저장 함수만 DB insert로 교체하면 됩니다.
 async function saveGuestMessage(newMessage) {
   const messages = await fetchGuestMessages();
-  messages.unshift(newMessage); // 최신 글이 맨 위로 오도록 추가
+  messages.unshift(newMessage);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
 }
 
 function escapeHTML(str) {
-  return str.replace(
+  return String(str).replace(
     /[&<>"']/g,
     (tag) =>
       ({
@@ -434,32 +508,147 @@ function escapeHTML(str) {
   );
 }
 
+function getMessagePages(messages) {
+  const pages = [];
+  for (let i = 0; i < messages.length; i += MESSAGES_PER_PAGE) {
+    pages.push(messages.slice(i, i + MESSAGES_PER_PAGE));
+  }
+  return pages.length > 0 ? pages : [[]];
+}
+
+function updateMsgPageSlider(totalPages) {
+  const track = document.getElementById("msgPagesTrack");
+  const indicator = document.getElementById("msgPageIndicator");
+  if (!track) return;
+
+  if (currentMsgPage >= totalPages)
+    currentMsgPage = Math.max(0, totalPages - 1);
+  track.style.transform = `translateX(-${currentMsgPage * 100}%)`;
+
+  if (indicator) {
+    indicator.innerText = `${currentMsgPage + 1} / ${totalPages}`;
+  }
+}
+
+function changeMsgPage(delta, totalPages) {
+  if (totalPages <= 1) return;
+  currentMsgPage = (currentMsgPage + delta + totalPages) % totalPages;
+  updateMsgPageSlider(totalPages);
+}
+
 async function renderGuestMessages() {
   const listEl = document.getElementById("messageList");
   if (!listEl) return;
 
   const messages = await fetchGuestMessages();
-  listEl.innerHTML = messages
+  const myPrivateIds = getMyPrivateIds();
+  const pages = getMessagePages(messages);
+  const totalPages = pages.length;
+
+  const slidesHTML = pages
     .map(
-      (msg) => `
-        <div class="guest-msg-card">
-            <div class="guest-msg-text">${escapeHTML(msg.content)}</div>
-            <div class="guest-msg-footer">
-                <div class="guest-msg-from">
-                    <span class="from-label">From</span>${escapeHTML(msg.name)}
+      (pageMsgs) => `
+        <div class="msg-page-slide">
+          ${pageMsgs
+            .map((msg) => {
+              const isPrivate = Boolean(msg.isPrivate);
+              const isMine = msg.id && myPrivateIds.includes(msg.id);
+              const canViewContent = !isPrivate || isMine;
+
+              const displayContent = canViewContent
+                ? escapeHTML(msg.content)
+                : currentLang === "ko"
+                ? "신랑·신부에게만 공개된 비공개 메시지입니다."
+                : "Private message visible only to the bride and groom.";
+
+              const lockBadge = isPrivate
+                ? `<span class="msg-lock-icon" title="Private">🔒</span>`
+                : "";
+
+              return `
+                <div class="guest-msg-card">
+                  <div class="guest-msg-text ${
+                    canViewContent ? "" : "is-private-hidden"
+                  }">${displayContent}</div>
+                  <div class="guest-msg-footer">
+                    <div class="guest-msg-from">
+                      <span class="from-label">From</span>${escapeHTML(
+                        msg.name
+                      )}${lockBadge}
+                    </div>
+                    <div class="guest-msg-date">${escapeHTML(
+                      msg.createdAt
+                    )}</div>
+                  </div>
                 </div>
-                <div class="guest-msg-date">${escapeHTML(msg.createdAt)}</div>
-            </div>
+              `;
+            })
+            .join("")}
         </div>
-    `
+      `
     )
     .join("");
+
+  const paginationHTML =
+    totalPages > 1
+      ? `
+        <div class="msg-pagination-bar" id="msgPaginationBar">
+          <button type="button" class="msg-page-btn" id="prevMsgPageBtn">‹</button>
+          <span id="msgPageIndicator">${
+            currentMsgPage + 1
+          } / ${totalPages}</span>
+          <button type="button" class="msg-page-btn" id="nextMsgPageBtn">›</button>
+        </div>
+      `
+      : "";
+
+  listEl.innerHTML = `
+    <div class="msg-pages-viewport" id="msgPagesViewport">
+      <div class="msg-pages-track" id="msgPagesTrack">
+        ${slidesHTML}
+      </div>
+    </div>
+    ${paginationHTML}
+  `;
+
+  updateMsgPageSlider(totalPages);
+
+  const prevBtn = document.getElementById("prevMsgPageBtn");
+  const nextBtn = document.getElementById("nextMsgPageBtn");
+  if (prevBtn)
+    prevBtn.addEventListener("click", () => changeMsgPage(-1, totalPages));
+  if (nextBtn)
+    nextBtn.addEventListener("click", () => changeMsgPage(1, totalPages));
+
+  const viewport = document.getElementById("msgPagesViewport");
+  if (viewport && totalPages > 1 && !viewport.dataset.swipeBound) {
+    viewport.addEventListener(
+      "touchstart",
+      (e) => {
+        msgTouchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    viewport.addEventListener(
+      "touchend",
+      (e) => {
+        const diffX = e.changedTouches[0].clientX - msgTouchStartX;
+        if (Math.abs(diffX) > 40) {
+          changeMsgPage(diffX < 0 ? 1 : -1, totalPages);
+        }
+      },
+      { passive: true }
+    );
+    viewport.dataset.swipeBound = "true";
+  }
 }
 
 function openMessageModal() {
   const modal = document.getElementById("messageModal");
   const nameInput = document.getElementById("guestNameInput");
   const contentInput = document.getElementById("guestContentInput");
+
+  setMessagePrivacy("public");
 
   if (nameInput) {
     nameInput.placeholder =
@@ -518,25 +707,35 @@ async function submitGuestMessage(event) {
 
   if (!name || !content) return;
 
+  const msgId = `msg-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+
+  if (isMessagePrivate) {
+    addMyPrivateId(msgId);
+  }
+
   await saveGuestMessage({
+    id: msgId,
     name,
     content,
     createdAt: formatCurrentTimestamp(),
+    isPrivate: isMessagePrivate,
   });
 
+  currentMsgPage = 0;
   nameInput.value = "";
   contentInput.value = "";
+  setMessagePrivacy("public");
   updateCharCount();
   closeMessageModal();
   await renderGuestMessages();
 }
+
 // ==========================================
 // RSVP FORM LOGIC & GOOGLE SHEETS SUBMISSION
 // ==========================================
 let rsvpSide = "신랑측";
 let rsvpMeal = "예정";
 
-// 나중에 Google Sheets Apps Script 웹앱 URL을 발급받으시면 여기에 붙여넣으세요!
 const GOOGLE_SHEETS_RSVP_URL = "";
 
 function selectRsvpOption(type, btnEl) {
@@ -553,7 +752,6 @@ function selectRsvpOption(type, btnEl) {
   }
 }
 
-// 참석인원 1명일 때 동행인 칸 Grey Out 및 비활성화
 function handleGuestCountChange() {
   const countInput = document.getElementById("rsvpCount");
   const companionInput = document.getElementById("rsvpCompanion");
@@ -612,7 +810,6 @@ async function submitRsvp(event) {
         body: JSON.stringify(payload),
       });
     } else {
-      // 웹앱 URL 연결 전 로컬 백업 저장
       const localRsvps = JSON.parse(
         localStorage.getItem("paul_mary_rsvps") || "[]"
       );
@@ -639,6 +836,7 @@ async function submitRsvp(event) {
     submitBtn.innerText = currentLang === "ko" ? "전달하기" : "Submit RSVP";
   }
 }
+
 // ==========================================
 // SCROLL CUE: 첫 페이지 진입 후 정확히 5초 뒤 등장
 // ==========================================
@@ -649,18 +847,15 @@ function initScrollCue() {
   const scrollCue = document.getElementById("scrollCue");
   if (!container || !scrollCue) return;
 
-  // 처음 진입 시 확실히 숨김 초기화
   scrollCue.classList.remove("is-visible", "is-hidden");
   if (scrollCueTimer) clearTimeout(scrollCueTimer);
 
-  // 5초(5000ms) 뒤에 표시
   scrollCueTimer = setTimeout(() => {
     if (container.scrollTop <= 30) {
       scrollCue.classList.add("is-visible");
     }
   }, 5000);
 
-  // 스크롤 내리면 숨김
   if (!scrollCue.dataset.bound) {
     container.addEventListener(
       "scroll",

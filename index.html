@@ -29,11 +29,10 @@
                 </div>
 
                 <div class="intro-subtitle" data-en="THE WEDDING OF" data-ko="소중한 두 사람의 결혼식">THE WEDDING OF</div>
-                <h1 class="intro-names">
-                    Mary Hyojin Park
-                    <span class="intro-amp">&</span>
-                    Paul Taehyun Lee
+                <h1 class="intro-names" id="introNames">
+                    박효진 <span class="intro-amp">&</span> 이태현
                 </h1>
+                
                 
                 <div class="intro-date">Saturday, Nov 7, 2026</div>
 
@@ -108,22 +107,22 @@
                     <div class="parents-container">
                         <div class="person-group">
                             <div class="role-tag" data-en="Groom" data-ko="신랑">Groom</div>
-                            <div class="name">Paul Taehyun Lee</div>
+                            <div class="name" data-en="Paul Taehyun Lee" data-ko="이태현">Paul Taehyun Lee</div>
                             <div class="parents">
                                 <span data-en="Son of Jason Dongjin Lee & Ae Sook Lee" data-ko="이동진 · 이애숙의 아들">Son of Jason Dongjin Lee & Ae Sook Lee</span>
                             </div>
-                            <div class="person-photo-box" onclick="openLightbox('images/groom.jpg')">
+                            <div class="person-photo-box">
                                 <img src="images/groom.jpeg" alt="Paul Taehyun Lee" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80'">
                             </div>
                         </div>
 
                         <div class="person-group">
                             <div class="role-tag" data-en="Bride" data-ko="신부">Bride</div>
-                            <div class="name">Mary Hyojin Park</div>
+                            <div class="name" data-en="Mary Hyojin Park" data-ko="박효진">Mary Hyojin Park</div>
                             <div class="parents">
                                 <span data-en="Daughter of Jong Eil Park & Yong Ran Lee" data-ko="박종일 · 이용란의 딸">Daughter of Jong Eil Park & Yong Ran Lee</span>
                             </div>
-                            <div class="person-photo-box" onclick="openLightbox('images/bride.jpg')">
+                            <div class="person-photo-box" >
                                 <img src="images/bride.jpeg" alt="Mary Hyojin Park" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80'">
                             </div>
                         </div>
@@ -145,7 +144,7 @@
                         </div>
                     </div>
 
-                    <div class="date-center-photo-wrap" onclick="openLightbox('images/0307.jpg')">
+                    <div class="date-center-photo-wrap">
                         <img src="images/0307.jpeg" alt="0307 Wedding Day Photo" class="date-center-photo" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80'">
                     </div>
                 </div>
@@ -241,7 +240,10 @@
                             Apple Maps
                         </a>
                     </div>
-
+                    <p class="parking-notice" data-en="Parking is available inside the church building." data-ko="주차 공간은 성당 건물 안쪽에 마련되어 있습니다.">
+                        Parking is available inside the church building.
+                    </p>
+                    
                 </div>
             </section>
 
@@ -433,7 +435,16 @@
                         maxlength="20"
                         placeholder="성함을 남겨주세요 / Your Name" 
                         required>
-    
+                        <!-- Public / Private 선택 토글 -->
+                    <div class="msg-privacy-toggle" role="group" aria-label="Message Visibility">
+                        <button type="button" class="privacy-opt-btn active" data-privacy="public" onclick="setMessagePrivacy('public')">
+                            <span data-en="Public" data-ko="전체 공개">Public</span>
+                        </button>
+                        <button type="button" class="privacy-opt-btn" data-privacy="private" onclick="setMessagePrivacy('private')">
+                            🔒 <span data-en="Private" data-ko="비공개">Private</span>
+                        </button>
+                    </div>
+
                     <div class="msg-textarea-wrap">
                         <textarea 
                             id="guestContentInput" 
